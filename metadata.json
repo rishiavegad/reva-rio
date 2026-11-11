@@ -1,0 +1,6 @@
+{
+  "name": "IoT P2P Trust-PBFT & RL Blockchain Simulator",
+  "description": "Blockchain-based lightweight secure peer-to-peer communication framework for resource-constrained IoT networks using trust-aware PBFT consensus, hybrid metaheuristic optimization, and RL anomaly detection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

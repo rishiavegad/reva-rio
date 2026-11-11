@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IoT P2P Trust-PBFT & RL Blockchain Data Schemas",
+  "definitions": {
+    "P2PMessage": {
+      "type": "object",
+      "required": [
+        "message_id",
+        "sender_id",
+        "receiver_id",
+        "message_type",
+        "payload",
+        "nonce",
+        "timestamp",
+        "signature"
+      ],
+      "properties": {
+        "message_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "sender_id": {"type": "string"},
+        "receiver_id": {"type": "string"},
+        "message_type": {
+          "type": "string",
+          "enum": ["TX_PROPOSAL", "PRE_PREPARE", "PREPARE", "COMMIT", "VIEW_CHANGE", "NEW_VIEW", "HEARTBEAT", "CHALLENGE"]
+        },
+        "payload": {"type": "object"},
+        "nonce": {"type": "integer", "minimum": 0},
+        "timestamp": {"type": "number"},
+        "signature": {"type": "string", "pattern": "^[a-f0-9]{128}$"}
+      }
+    },
+    "DAGTransaction": {
+      "type": "object",
+      "required": [
+        "tx_id",
+        "parents",
+        "payload_cid",
+        "sender_pubkey",
+        "nonce",
+        "timestamp",
+        "signature"
+      ],
+      "properties": {
+        "tx_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "parents": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "payload_cid": {"type": "string", "pattern": "^Qm[a-zA-Z0-9]{44}|bafy[a-zA-Z0-9]{55}$"},
+        "payload_size_bytes": {"type": "integer", "minimum": 0},
+        "sender_pubkey": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "nonce": {"type": "integer"},
+        "timestamp": {"type": "number"},
+        "signature": {"type": "string", "pattern": "^[a-f0-9]{128}$"},
+        "quorum_cert": {
+          "type": ["object", "null"],
+          "properties": {
+            "view": {"type": "integer"},
+            "sequence_number": {"type": "integer"},
+            "block_hash": {"type": "string"},
+            "signatures": {
+              "type": "object",
+              "additionalProperties": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "ConsensusBallot": {
+      "type": "object",
+      "required": ["phase", "view", "sequence_number", "digest", "validator_id", "signature"],
+      "properties": {
+        "phase": {"type": "string", "enum": ["PRE_PREPARE", "PREPARE", "COMMIT"]},
+        "view": {"type": "integer", "minimum": 0},
+        "sequence_number": {"type": "integer", "minimum": 0},
+        "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "validator_id": {"type": "string"},
+        "signature": {"type": "string", "pattern": "^[a-f0-9]{128}$"}
+      }
+    },
+    "NodeTrustProfile": {
+      "type": "object",
+      "required": ["node_id", "composite_trust", "direct_trust", "consensus_trust", "anomaly_factor", "total_interactions", "quarantined"],
+      "properties": {
+        "node_id": {"type": "string"},
+        "composite_trust": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+        "direct_trust": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+        "consensus_trust": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+        "anomaly_factor": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+        "total_interactions": {"type": "integer", "minimum": 0},
+        "quarantined": {"type": "boolean"},
+        "last_updated": {"type": "number"}
+      }
+    },
+    "RLObservationState": {
+      "type": "object",
+      "required": ["node_id", "features", "recommended_action", "confidence"],
+      "properties": {
+        "node_id": {"type": "string"},
+        "features": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 6,
+          "maxItems": 6,
+          "description": "[msg_freq, sig_fail_rate, replay_rate, latency_ratio, equiv_flag, trust_score]"
+        },
+        "recommended_action": {"type": "string", "enum": ["ALLOW", "RATE_LIMIT", "QUARANTINE"]},
+        "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+      }
+    }
+  }
+}

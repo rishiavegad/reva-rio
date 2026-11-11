@@ -1,0 +1,186 @@
+{
+  "timestamp": 1794206507.5458412,
+  "total_experiment_duration_sec": 3.14,
+  "consensus_scalability": [
+    {
+      "node_count": 10,
+      "std_pbft_msgs": 189,
+      "std_pbft_latency_ms": 74.02,
+      "npbft_committee_size": 7,
+      "npbft_msgs": 90,
+      "npbft_latency_ms": 58.01,
+      "message_reduction_pct": 52.38
+    },
+    {
+      "node_count": 20,
+      "std_pbft_msgs": 779,
+      "std_pbft_latency_ms": 180.22,
+      "npbft_committee_size": 7,
+      "npbft_msgs": 90,
+      "npbft_latency_ms": 59.14,
+      "message_reduction_pct": 88.45
+    },
+    {
+      "node_count": 30,
+      "std_pbft_msgs": 1769,
+      "std_pbft_latency_ms": 358.42,
+      "npbft_committee_size": 7,
+      "npbft_msgs": 90,
+      "npbft_latency_ms": 55.22,
+      "message_reduction_pct": 94.91
+    },
+    {
+      "node_count": 40,
+      "std_pbft_msgs": 3159,
+      "std_pbft_latency_ms": 608.62,
+      "npbft_committee_size": 7,
+      "npbft_msgs": 90,
+      "npbft_latency_ms": 55.24,
+      "message_reduction_pct": 97.15
+    },
+    {
+      "node_count": 50,
+      "std_pbft_msgs": 4949,
+      "std_pbft_latency_ms": 930.82,
+      "npbft_committee_size": 7,
+      "npbft_msgs": 90,
+      "npbft_latency_ms": 59.13,
+      "message_reduction_pct": 98.18
+    }
+  ],
+  "storage_evaluation": [
+    {
+      "tx_count": 50,
+      "monolithic_blockchain_kb": 714.36,
+      "dag_on_chain_kb": 16.21,
+      "ipfs_off_chain_kb": 701.86,
+      "on_chain_storage_reduction_pct": 97.73
+    },
+    {
+      "tx_count": 100,
+      "monolithic_blockchain_kb": 1428.71,
+      "dag_on_chain_kb": 32.42,
+      "ipfs_off_chain_kb": 1403.71,
+      "on_chain_storage_reduction_pct": 97.73
+    },
+    {
+      "tx_count": 250,
+      "monolithic_blockchain_kb": 3571.78,
+      "dag_on_chain_kb": 81.05,
+      "ipfs_off_chain_kb": 3509.28,
+      "on_chain_storage_reduction_pct": 97.73
+    },
+    {
+      "tx_count": 500,
+      "monolithic_blockchain_kb": 7143.55,
+      "dag_on_chain_kb": 162.11,
+      "ipfs_off_chain_kb": 7018.55,
+      "on_chain_storage_reduction_pct": 97.73
+    },
+    {
+      "tx_count": 1000,
+      "monolithic_blockchain_kb": 14287.11,
+      "dag_on_chain_kb": 324.22,
+      "ipfs_off_chain_kb": 14037.11,
+      "on_chain_storage_reduction_pct": 97.73
+    }
+  ],
+  "optimization_ablation": {
+    "GWO (Mirjalili 2014)": {
+      "mean_fitness": -0.372,
+      "best_fitness": -0.3773,
+      "std_deviation": 0.0048,
+      "constraint_satisfaction_rate_pct": 100.0,
+      "avg_runtime_ms": 40.75
+    },
+    "PSO (Kennedy 1995)": {
+      "mean_fitness": -0.3707,
+      "best_fitness": -0.3765,
+      "std_deviation": 0.0045,
+      "constraint_satisfaction_rate_pct": 100.0,
+      "avg_runtime_ms": 33.31
+    },
+    "SA (Kirkpatrick 1983)": {
+      "mean_fitness": -0.364,
+      "best_fitness": -0.3725,
+      "std_deviation": 0.0064,
+      "constraint_satisfaction_rate_pct": 100.0,
+      "avg_runtime_ms": 15.15
+    },
+    "ATHO (Proposed)": {
+      "mean_fitness": -0.3745,
+      "best_fitness": -0.3773,
+      "std_deviation": 0.0024,
+      "constraint_satisfaction_rate_pct": 100.0,
+      "avg_runtime_ms": 71.55
+    }
+  },
+  "anomaly_detection": {
+    "Double-DQN (Proposed)": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "false_positive_rate": 0.0,
+      "avg_inference_latency_us": 117.57,
+      "confusion_matrix": {
+        "TP": 100,
+        "FP": 0,
+        "TN": 200,
+        "FN": 0
+      }
+    },
+    "Rule Threshold Baseline": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "false_positive_rate": 0.0,
+      "avg_inference_latency_us": 0.44,
+      "confusion_matrix": {
+        "TP": 100,
+        "FP": 0,
+        "TN": 200,
+        "FN": 0
+      }
+    },
+    "Statistical Centroid Baseline": {
+      "precision": 0.5824,
+      "recall": 0.53,
+      "f1_score": 0.555,
+      "false_positive_rate": 0.19,
+      "avg_inference_latency_us": 1.63,
+      "confusion_matrix": {
+        "TP": 53,
+        "FP": 38,
+        "TN": 162,
+        "FN": 47
+      }
+    }
+  },
+  "attack_resilience": {
+    "FORGERY": {
+      "injected": 0,
+      "intercepted": 0,
+      "slashed": true
+    },
+    "REPLAY": {
+      "injected": 0,
+      "intercepted": 0,
+      "slashed": true
+    },
+    "EQUIVOCATION": {
+      "injected": 0,
+      "intercepted": 0,
+      "slashed": true
+    },
+    "FLOOD": {
+      "injected": 0,
+      "intercepted": 0,
+      "slashed": true
+    },
+    "FLAKY": {
+      "injected": 0,
+      "intercepted": 0,
+      "slashed": true
+    }
+  }
+}
